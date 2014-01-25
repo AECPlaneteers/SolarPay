@@ -10,4 +10,6 @@
 
 @interface ChartCell : UITableViewCell
 
+@property (nonatomic) NSDictionary* results;
+
 @end

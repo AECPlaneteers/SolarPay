@@ -34,6 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
 	// Do any additional setup after loading the view.
     [RACObserve(self, results) subscribeNext:^(id x) {
         [self.tableView reloadData];
@@ -117,14 +120,14 @@
         case 1:
         {
             ChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chartCell"];
-            //cell.results = self.results;
+            cell.results = self.results;
             return cell;
         }
         case 2:
         {
             SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
             NSNumber *value = self.results[@"payback_year"];
-            if ([self.results[@"payback_year"] isEqualToString:@"Infinity"])
+            if ([self.results[@"payback_year"] isKindOfClass:[NSString class]] && [self.results[@"payback_year"] isEqualToString:@"Infinity"])
             {
                 cell.valueText = @"> 30 years";
             }
@@ -154,7 +157,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.results ? 1 : 0;
+}
+
+# pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1)
+    {
+        return 300;
+    }
+    else
+    {
+        return 72;
+    }
 }
 
 @end
