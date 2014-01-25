@@ -38,6 +38,9 @@
     [RACObserve(self, results) subscribeNext:^(id x) {
         [self.tableView reloadData];
     }];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -107,7 +110,8 @@
             SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
             NSArray *array = self.results[@"cumulative_annual_savings"];
             cell.labelText = @"Cumulative Savings";
-            cell.valueText = (NSString*)[array objectAtIndex:[array count] - 1];
+            NSNumber *value = [array objectAtIndex:[array count] - 1];
+            cell.valueText = [NSString stringWithFormat:@"$%d", value.integerValue];
             return cell;
         }
         case 1:
@@ -116,13 +120,36 @@
             //cell.results = self.results;
             return cell;
         }
+        case 2:
+        {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            NSNumber *value = self.results[@"payback_year"];
+            if ([self.results[@"payback_year"] isEqualToString:@"Infinity"])
+            {
+                cell.valueText = @"> 30 years";
+            }
+            else
+            {
+                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", value.stringValue];
+            }
+            cell.labelText = @"Break Even";
+            return cell;
+        }
+        default:
+            return nil;
     }
-    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    if (self.results)
+    {
+        return 3;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
