@@ -24,6 +24,8 @@
 		6370A8EB18943CCD00E16238 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6370A8EA18943CCD00E16238 /* MapKit.framework */; };
 		6370A8EE189445FD00E16238 /* DataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6370A8ED189445FD00E16238 /* DataInputViewController.m */; };
 		6370A8F118944B0D00E16238 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6370A8F018944B0D00E16238 /* ResultsViewController.m */; };
+		63FD66CC18945B4D00015A7E /* SingleValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FD66CB18945B4D00015A7E /* SingleValueTableViewCell.m */; };
+		63FD66CF18945CE100015A7E /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FD66CE18945CE100015A7E /* ChartCell.m */; };
 		71FF936B4D744CFF84CDC4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01166E1D82C640FB99E65254 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,10 @@
 		6370A8ED189445FD00E16238 /* DataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataInputViewController.m; sourceTree = "<group>"; };
 		6370A8EF18944B0D00E16238 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		6370A8F018944B0D00E16238 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		63FD66CA18945B4D00015A7E /* SingleValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleValueTableViewCell.h; sourceTree = "<group>"; };
+		63FD66CB18945B4D00015A7E /* SingleValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleValueTableViewCell.m; sourceTree = "<group>"; };
+		63FD66CD18945CE100015A7E /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
+		63FD66CE18945CE100015A7E /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
 		C8F95536759F42E98BA6CA26 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +145,10 @@
 				6370A8ED189445FD00E16238 /* DataInputViewController.m */,
 				6370A8EF18944B0D00E16238 /* ResultsViewController.h */,
 				6370A8F018944B0D00E16238 /* ResultsViewController.m */,
+				63FD66CA18945B4D00015A7E /* SingleValueTableViewCell.h */,
+				63FD66CB18945B4D00015A7E /* SingleValueTableViewCell.m */,
+				63FD66CD18945CE100015A7E /* ChartCell.h */,
+				63FD66CE18945CE100015A7E /* ChartCell.m */,
 			);
 			path = SolarPay;
 			sourceTree = "<group>";
@@ -308,7 +318,9 @@
 				6370A8EE189445FD00E16238 /* DataInputViewController.m in Sources */,
 				6370A8C618943AE600E16238 /* AppDelegate.m in Sources */,
 				6370A8C218943AE600E16238 /* main.m in Sources */,
+				63FD66CF18945CE100015A7E /* ChartCell.m in Sources */,
 				6370A8F118944B0D00E16238 /* ResultsViewController.m in Sources */,
+				63FD66CC18945B4D00015A7E /* SingleValueTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

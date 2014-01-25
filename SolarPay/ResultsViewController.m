@@ -9,10 +9,12 @@
 #import "ResultsViewController.h"
 #import <MBProgressHUD.h>
 #import <AFNetworking.h>
+#import <ReactiveCocoa.h>
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <UITableViewDataSource>
 
 @property NSDictionary *results;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -31,6 +33,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [RACObserve(self, results) subscribeNext:^(id x) {
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,6 +90,14 @@
              [alertView show];
          }
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];}
+     }];
+}
+
+#pragma mark - UITableViewDatasource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
 
 @end
