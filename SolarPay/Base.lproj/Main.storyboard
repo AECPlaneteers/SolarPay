@@ -177,7 +177,7 @@
                                             <outlet property="valueLabel" destination="vV6-xa-thA" id="frU-Gu-2HG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="197" id="hds-qA-ZLM">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chartCell" rowHeight="197" id="hds-qA-ZLM">
                                         <rect key="frame" x="0.0" y="158" width="320" height="197"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hds-qA-ZLM" id="FZc-A1-9at">

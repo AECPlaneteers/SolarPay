@@ -10,6 +10,8 @@
 #import <MBProgressHUD.h>
 #import <AFNetworking.h>
 #import <ReactiveCocoa.h>
+#import "SingleValueTableViewCell.h"
+#import "ChartCell.h"
 
 @interface ResultsViewController () <UITableViewDataSource>
 
@@ -82,6 +84,7 @@
              else
              {
                  self.results = results;
+                 NSLog(@"%@", results);
              }
          }
          else
@@ -97,7 +100,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.row)
+    {
+        case 0:
+        {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            NSArray *array = self.results[@"cumulative_annual_savings"];
+            cell.labelText = @"Cumulative Savings";
+            cell.valueText = (NSString*)[array objectAtIndex:[array count] - 1];
+            return cell;
+        }
+        case 1:
+        {
+            ChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chartCell"];
+            //cell.results = self.results;
+            return cell;
+        }
+    }
     return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 @end
