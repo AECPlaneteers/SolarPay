@@ -133,7 +133,11 @@
             }
             else
             {
-                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", value.stringValue];
+                NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+                formatter.maximumFractionDigits = 0;
+                [formatter stringFromNumber:value];
+                
+                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", [formatter stringFromNumber:value]];
             }
             cell.labelText = @"Break Even";
             return cell;
