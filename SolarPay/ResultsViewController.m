@@ -56,7 +56,13 @@
                            completionHandler:^(NSURLResponse *response,
                                                NSData *data, NSError *connectionError)
      {
-         if (data.length > 0 && connectionError == nil)
+         if (connectionError)
+         {
+             NSLog(@"Error: %@", connectionError);
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error connecting to server." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alertView show];
+         }
+         else if (data.length > 0)
          {
              NSError *error;
              NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data
@@ -65,13 +71,20 @@
              if (error)
              {
                  NSLog(@"Error: %@", error);
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not interpret results." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alertView show];
              }
              else
              {
                  self.results = results;
              }
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }
+         else
+         {
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No data returned." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alertView show];
+         }
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      }];}
 
 @end
