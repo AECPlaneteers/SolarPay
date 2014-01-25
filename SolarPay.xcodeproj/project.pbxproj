@@ -185,9 +185,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6370A8B118943AE600E16238 /* SolarPay */ = {
+		6370A8B118943AE600E16238 /* SolarCents */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6370A8E418943AE600E16238 /* Build configuration list for PBXNativeTarget "SolarPay" */;
+			buildConfigurationList = 6370A8E418943AE600E16238 /* Build configuration list for PBXNativeTarget "SolarCents" */;
 			buildPhases = (
 				F1B6CFD6D84D4672B75EB999 /* Check Pods Manifest.lock */,
 				6370A8AE18943AE600E16238 /* Sources */,
@@ -199,7 +199,7 @@
 			);
 			dependencies = (
 			);
-			name = SolarPay;
+			name = SolarCents;
 			productName = SolarPay;
 			productReference = 6370A8B218943AE600E16238 /* SolarPay.app */;
 			productType = "com.apple.product-type.application";
@@ -249,7 +249,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6370A8B118943AE600E16238 /* SolarPay */,
+				6370A8B118943AE600E16238 /* SolarCents */,
 				6370A8D218943AE600E16238 /* SolarPayTests */,
 			);
 		};
@@ -337,7 +337,7 @@
 /* Begin PBXTargetDependency section */
 		6370A8D918943AE600E16238 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6370A8B118943AE600E16238 /* SolarPay */;
+			target = 6370A8B118943AE600E16238 /* SolarCents */;
 			targetProxy = 6370A8D818943AE600E16238 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -524,7 +524,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6370A8E418943AE600E16238 /* Build configuration list for PBXNativeTarget "SolarPay" */ = {
+		6370A8E418943AE600E16238 /* Build configuration list for PBXNativeTarget "SolarCents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6370A8E518943AE600E16238 /* Debug */,
