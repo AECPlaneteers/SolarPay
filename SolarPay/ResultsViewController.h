@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface ResultsViewController : UIViewController
+
+@property int kilowatts;
+@property CLLocationCoordinate2D coordinates;
 
 @end

@@ -8,8 +8,11 @@
 
 #import "ResultsViewController.h"
 #import <MBProgressHUD.h>
+#import <AFNetworking.h>
 
 @interface ResultsViewController ()
+
+@property NSDictionary *results;
 
 @end
 
@@ -33,6 +36,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self fetchDataFromWebservice];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,5 +44,47 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)fetchDataFromWebservice
+{
+    NSString *urlTemplate = @"http://planeteer.herokuapp.com/solarcalculator?system_size=%d&lat=%f&lon=%f";
+    NSString *urlString = [NSString stringWithFormat:urlTemplate, self.kilowatts, self.coordinates.latitude, self.coordinates.longitude];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data, NSError *connectionError)
+     {
+         if (connectionError)
+         {
+             NSLog(@"Error: %@", connectionError);
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error connecting to server." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alertView show];
+         }
+         else if (data.length > 0)
+         {
+             NSError *error;
+             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:0
+                                                                       error:&error];
+             if (error)
+             {
+                 NSLog(@"Error: %@", error);
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not interpret results." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alertView show];
+             }
+             else
+             {
+                 self.results = results;
+             }
+         }
+         else
+         {
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No data returned." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alertView show];
+         }
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+     }];}
 
 @end
