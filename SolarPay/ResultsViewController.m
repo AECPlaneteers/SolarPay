@@ -133,9 +133,21 @@
             }
             else
             {
-                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", value.stringValue];
+                NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+                formatter.maximumFractionDigits = 0;
+                [formatter stringFromNumber:value];
+                
+                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", [formatter stringFromNumber:value]];
             }
             cell.labelText = @"Break Even";
+            return cell;
+        }
+        case 3:
+        {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            NSNumber *value = self.results[@"estimated_installation_cost"];
+            cell.labelText = @"Estimated Cost";
+            cell.valueText = [NSString stringWithFormat:@"$%@", value.stringValue];
             return cell;
         }
         default:
@@ -147,7 +159,7 @@
 {
     if (self.results)
     {
-        return 3;
+        return 4;
     }
     else
     {
