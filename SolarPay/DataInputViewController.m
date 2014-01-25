@@ -8,7 +8,7 @@
 
 #import "DataInputViewController.h"
 #import <ReactiveCocoa.h>
-
+#import "ResultsViewController.h"
 
 @interface DataInputViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *latitudeLabel;
@@ -58,6 +58,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[ResultsViewController class]])
+    {
+        ResultsViewController *rvc = segue.destinationViewController;
+        rvc.kilowatts = [self.kilowattsTextField.text intValue];
+        rvc.coordinates = self.coordinates;
+    }
 }
 
 @end

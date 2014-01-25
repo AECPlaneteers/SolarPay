@@ -89,7 +89,6 @@
 {
     [self.mapView removeAnnotation:self.annotation];
     self.annotation = nil;
-    
 }
 
 @end
