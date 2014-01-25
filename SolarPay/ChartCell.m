@@ -24,7 +24,7 @@
 
 -(void)awakeFromNib
 {
-    UIScrollView *graphContainer = [[UIScrollView alloc] initWithFrame:self.contentView.bounds];
+    UIScrollView *graphContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 299)];
     
     [self.contentView addSubview:graphContainer];
     self.chartContainer = graphContainer;
@@ -36,7 +36,7 @@
     
     [self.lineChart removeFromSuperview];
     
-    CGRect size = CGRectMake(0, 0, self.contentView.bounds.size.width * 3, self.contentView.bounds.size.height);
+    CGRect size = CGRectMake(0, 0, self.contentView.bounds.size.width * 3, 299);
     
     PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:size];
     lineChart.backgroundColor = [UIColor clearColor];
@@ -61,16 +61,6 @@
         CGFloat yValue = [[data01Array objectAtIndex:index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
-    
-    // Line Chart Nr.2
-//    NSArray * data02Array = @[@20.1, @180.1, @26.4, @202.2, @126.2, @167.2, @276.2];
-//    PNLineChartData *data02 = [PNLineChartData new];
-//    data02.color = PNTwitterColor;
-//    data02.itemCount = lineChart.xLabels.count;
-//    data02.getData = ^(NSUInteger index) {
-//        CGFloat yValue = [[data02Array objectAtIndex:index] floatValue];
-//        return [PNLineChartDataItem dataItemWithY:yValue];
-//    };
     
     lineChart.chartData = @[data01];
     [lineChart strokeChart];
