@@ -9,10 +9,14 @@
 #import "ResultsViewController.h"
 #import <MBProgressHUD.h>
 #import <AFNetworking.h>
+#import <ReactiveCocoa.h>
+#import "SingleValueTableViewCell.h"
+#import "ChartCell.h"
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <UITableViewDataSource>
 
 @property NSDictionary *results;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -30,7 +34,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
 	// Do any additional setup after loading the view.
+    [RACObserve(self, results) subscribeNext:^(id x) {
+        [self.tableView reloadData];
+    }];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,6 +90,7 @@
              else
              {
                  self.results = results;
+                 NSLog(@"%@", results);
              }
          }
          else
@@ -85,6 +99,79 @@
              [alertView show];
          }
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];}
+     }];
+}
+
+#pragma mark - UITableViewDatasource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row)
+    {
+        case 0:
+        {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            NSArray *array = self.results[@"cumulative_annual_savings"];
+            cell.labelText = @"Cumulative Savings";
+            NSNumber *value = [array objectAtIndex:[array count] - 1];
+            cell.valueText = [NSString stringWithFormat:@"$%d", value.integerValue];
+            return cell;
+        }
+        case 1:
+        {
+            ChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chartCell"];
+            cell.results = self.results;
+            return cell;
+        }
+        case 2:
+        {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            NSNumber *value = self.results[@"payback_year"];
+            if ([self.results[@"payback_year"] isKindOfClass:[NSString class]] && [self.results[@"payback_year"] isEqualToString:@"Infinity"])
+            {
+                cell.valueText = @"> 30 years";
+            }
+            else
+            {
+                cell.valueText =  [NSString stringWithFormat:@"%@ yrs", value.stringValue];
+            }
+            cell.labelText = @"Break Even";
+            return cell;
+        }
+        default:
+            return nil;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (self.results)
+    {
+        return 3;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.results ? 1 : 0;
+}
+
+# pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1)
+    {
+        return 300;
+    }
+    else
+    {
+        return 72;
+    }
+}
 
 @end
