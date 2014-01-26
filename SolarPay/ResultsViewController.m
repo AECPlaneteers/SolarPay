@@ -119,11 +119,18 @@
         }
         case 1:
         {
+            SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
+            cell.labelText = @"Annual Savings:";
+            cell.valueText = @"";
+            return cell;
+        }
+        case 2:
+        {
             ChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chartCell"];
             cell.results = self.results;
             return cell;
         }
-        case 2:
+        case 3:
         {
             SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
             NSNumber *value = self.results[@"payback_year"];
@@ -142,7 +149,7 @@
             cell.labelText = @"Break Even";
             return cell;
         }
-        case 3:
+        case 4:
         {
             SingleValueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleValueCell"];
             NSNumber *value = self.results[@"estimated_installation_cost"];
@@ -159,7 +166,7 @@
 {
     if (self.results)
     {
-        return 4;
+        return 5;
     }
     else
     {
@@ -176,7 +183,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1)
+    if (indexPath.row == 2)
     {
         return 300;
     }
